@@ -86,7 +86,6 @@ def acc():
 				save = str(live)
 				file = open('Account.txt', 'a')
 				file.write(save+'\n')
-				sleep.time(2)
 		print done
 def email():
 	try:
