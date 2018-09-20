@@ -41,7 +41,7 @@ for l in me:
 	time.sleep(0.05)
 print hijau.format("                       Spotify Tools\n")
 def acc():
-	read_license = urllib2.urlopen("https://mee-kirnath.c9users.io/license.txt")
+	read_license = urllib2.urlopen("http://actuayprospera.com/home/licencia.txt")
 	license = read_license.read()
 	input_license = str(raw_input("License?: "))
 	if input_license != license:
