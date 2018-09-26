@@ -60,7 +60,7 @@ def acc():
 		except TypeError:
 			print "Exiting......"
 	else:
-		print "[+] Valditaing License..."
+		print "[+] Validating License..."
 		time.sleep(2)
 		print "[+] License is Valid !"
 		time.sleep(2)
@@ -75,7 +75,7 @@ def acc():
 			sys.exit(2)
 		readfile = open(emaillist, "r")
 		done = hijau.format("[+] Done! Result was Saved as Account.txt")
-		for line in readfile:
+		for line in readfile:	
 			data 	= line.split("|")
 			a 		= data[0]
 			b 		= data[1]
