@@ -1,8 +1,9 @@
 # spotify-tools
-# Coded Kirnath Morscheck
+- Check spotify account
+- Check if email was registered in spotify
 
-How to Use ? 
-- git clone https://github.com/indrha7x/spotify-tools.git
+# HTU
+- git clone https://github.com/kirnath/spotify-tools.git
 - sudo pip install colorama
 - sudo pip install termcolor
 - cd spotify-tools
