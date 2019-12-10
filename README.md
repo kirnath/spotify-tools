@@ -4,9 +4,10 @@
 
 # HTU
 - git clone https://github.com/kirnath/spotify-tools.git
-- sudo pip install colorama
-- sudo pip install termcolor
+- sudo pip3 install colorama
+- sudo pip3 install termcolor
 - cd spotify-tools
-- python spotify.py
+- python3 spotify.py
 
 #Have a Nice Check!
+#Updated 10 Dec 2019
