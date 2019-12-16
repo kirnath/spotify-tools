@@ -1,6 +1,4 @@
-import urllib2
 import requests
-import urllib
 import time
 import sys
 import os
@@ -89,8 +87,8 @@ def email():
 			data 	= line.split("\n")
 			a 		= data[0]
 			quote_email = urllib.quote(a)
-			respon 	= urllib2.urlopen("https://www.spotify.com/id/xhr/json/isEmailAvailable.php?email={}".format(quote_email))
-			reason 	= respon.read()
+			respon 	= requests.get("https://www.spotify.com/id/xhr/json/isEmailAvailable.php?email={}".format(quote_email))
+			reason 	= respon.text
 			if "false" not in reason:
 				print (Fore.RED + "DIE ==>"),a
 			else:
