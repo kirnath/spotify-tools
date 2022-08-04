@@ -1,0 +1,8 @@
+[
+  {
+    "action": "talk",    
+    "text": "<speak><p>Hello.</p><p>How are you?</p></speak>",
+    "language": "en-US",
+    "style": 1
+  }
+]
